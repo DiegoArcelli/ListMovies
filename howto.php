@@ -4,7 +4,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="icon" href="https://d30y9cdsu7xlg0.cloudfront.net/png/466321-200.png">
+        <link rel="icon" href="https://d30y9cdsu7xlg0.cloudfront.net/png/2385-200.png">
     	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
 		<link rel="stylesheet" type="text/css" href="CSS/stile.css">
 		<style>
@@ -71,8 +71,8 @@
                   <li class="dropdown">
                       <a data-toggle="dropdown" class="dropdown-toggle" href="#">Suggestions<b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                          <li><a href="bestFilm.php">Highest Score</a></li>
-                          <li><a href="mostFilm.php">Most Seen</a></li>
+                          <li><a href="bestFilm.php">By Score</a></li>
+                          <li><a href="mostFilm.php">By Views</a></li>
                       </ul>
                   </li>
               </ul>
@@ -130,17 +130,17 @@
             </div>
 		<div class="container" id="cont">
 			<h3>How To Use</h3>
-			<p >Using ListMovies is very simple and intuitive. First thing first you need to get an account, so click on the
+			<p >Using ListMovies is very simple and intuitive. First you need to get an account, so click on the
             Sign Up icon. Then insert your email address, your user name and your password (the password must contain eight
             characters, one capital letter, one small letter and a number). After that wait
-            for the confirmation email (this operation could require some minutes). Once you received the email open it and click on
-            the link to confirm your account. After that click on the login icon  and insert your email address and your
+            for the confirmation email (this operation could require some minutes). Once you have received the email open it and click on
+            the link to confirm your account. Finally click on the login icon and insert your email address and your
             password to login.<br><br>Now to search for a film click on the search field on the navigation bar and then click on
             the film sub-field. Now insert the title of the film you're searching or a keyword and then click on the search
             button. After a few seconds the site will display a list of the films that correspond with the text entered before.
-            Once you found the right film click on the info button to open the page with the information of the film.<br><br>
+            Once you have found the right film click on the info button to open the page with the information of the film.<br><br>
             Select a score with the drop down menu and click on the add button to add the film to your list. If you want to
-            remove it click on the remove button. If you want you can also write a comment in the text area on the bottom of the page.
+            remove it click on the remove button, otherwise you can also write a comment in the text area on the bottom of the page.
             If you want to see the films with the highest score, click on the suggesion field on the navigation bar, and then
             click on highest score. The site will display a table of the films ordered by the highest average score.
             Do the same operation, but click on most watched, to order the table by the number of users that added the film

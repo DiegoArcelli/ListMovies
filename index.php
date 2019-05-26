@@ -1,45 +1,51 @@
-<html>
-	<head>
-		<title>Home</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
-		<link rel="stylesheet" type="text/css" href="CSS/stile.css">
-		<style>
-            * {
-            	font-size: 16px;
-            }
-			#name {
-				color: white;
-			}
+<?php
+	if(isset($_SERVER['HTTPS'])==false) {
+    	$_SERVER['HTTPS'] == 'on';
+    } 
+?>
 
-			#name:hover {
-				color: darkred;
-			}
-			#foto img {
-				margin-left: 15px;
-			}
-			body {
-              background-color: #3a3f47
-              color: white;
-      		}
-					#cont {
-							width: 60%;
-					}
-            @media only screen and (max-width: 750px) {
-                #cont {
-                    width: 100%;
-                }
-                #immagini, #myCarousel {
-                	display: none;
-                }
-            }
-		</style>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	</head>
+<html>
+		<head>
+			<title>Home</title>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	        <link rel="icon" href="https://d30y9cdsu7xlg0.cloudfront.net/png/2385-200.png">
+	    	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+			<link rel="stylesheet" type="text/css" href="CSS/stile.css">
+			<style>
+	      * {
+	      	font-size: 16px;
+	      }
+				#name {
+					color: white;
+				}
+				#name:hover {
+					color: darkred;
+				}
+				#foto img {
+					margin-left: 15px;
+				}
+				body {
+	          background-color: #3a3f47
+	          color: white;
+	  		}
+				#cont {
+						width: 60%;
+				}
+	      @media only screen and (max-width: 750px) {
+	          #cont {
+	              width: 100%;
+	          }
+	          #immagini, #myCarousel {
+	          	display: none;
+	          }
+	      }
+			</style>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		</head>
     <body>
     <nav class="navbar navbar-inverse"  style="border-radius: 0px; border: none; z-index: 1;">
         <div class="class="container-fluid>
@@ -72,8 +78,8 @@
                   <li class="dropdown">
                       <a data-toggle="dropdown" class="dropdown-toggle" href="#">Suggestions<b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                          <li><a href="bestFilm.php">Highest Score</a></li>
-                          <li><a href="mostFilm.php">Most Seen</a></li>
+                          <li><a href="bestFilm.php">By Score</a></li>
+                          <li><a href="mostFilm.php">By Views</a></li>
                       </ul>
                   </li>
               </ul>
@@ -131,10 +137,10 @@
             </div>
 			<div id="cont">
 			<h3>ListMovies</h3>
-			<p>ListMoivies is a website created for cinema passionates who want to keep track of the films they watch. In a very
+			<p>ListMovies is a website created for cinema passionates who want to keep track of the films they watch. In a very
 			simple and intuitive way, users can create an account on the website, search for the films they watched and add them
-			to a list. Users can also give a personal score to the varius film, in this way users can suggest to each other the
-		 	best film to watch indirectly. In fact the main goal of the page is create a commuity where user can share opinions
+			to a list. Users can also give a personal score to the various films, in this way users can suggest to each other the
+		 	best film to watch indirectly. In fact the main goal of the page is create a community where user can share opinions
 			about the films and search for the most appreciated movies.</p>
 			<center id="immagini">
 				<div id="foto" style="padding: 10px;">
@@ -145,8 +151,8 @@
                 <span>« If it can be written, or thought, it can be filmed »</span><br><span>( Stanley Kubrick )</span><br>
 			</center>
 			<p><br>In order to incentivate the opinion sharing users can write comments in each film information box. They can
-			write short review about the film or just give a presonal impression. In this way users can communicate directly and share
-            detailed opinions. If you want know more precisely how the site works and which possibilities it offers click on the
+			write a short review about the film or just give a  personal impression. In this way users can communicate directly and share
+            detailed opinions. If you want to know more precisely how the site works and which possibilities it offers click on the
             home field on the navigation bar and than click again in the How To field.</p>
 			<center id="immagini"><img style="padding-bottom: 20px" width="600" src="https://www.factinate.com/wp-content/uploads/2017/01/Feature-Image-2-Edited.jpg"><p>« Run, Forrest, Run! »</p></center>
 		</div>

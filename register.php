@@ -1,7 +1,14 @@
+<?php
+	session_start();
+	if(isset($_SESSION["name"]) && $_SESSION["logged"]==true){
+    	header("Location: profilo.php");
+    }
+?>
 <html>
 	<head>
-		<title>Home</title>
+		<title>Registration</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="icon" href="https://d30y9cdsu7xlg0.cloudfront.net/png/2385-200.png">    
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
@@ -36,7 +43,6 @@
                       <ul class="dropdown-menu">
                           <li><a href="index.php">Main Page</a></li>
                           <li><a href="howto.php">How To</a></li>
-                          <li><a href="whoweare.php">Why</a></li>
                       </ul>
                   </li>
                   <li class="dropdown">
@@ -50,8 +56,8 @@
                   <li class="dropdown">
                       <a data-toggle="dropdown" class="dropdown-toggle" href="#">Suggestions<b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                          <li><a href="bestFilm.php">Highest Score</a></li>
-                          <li><a href="mostFilm.php">Most Seen</a></li>
+                          <li><a href="bestFilm.php">By Score</a></li>
+                          <li><a href="mostFilm.php">By Views</a></li>
                       </ul>
                   </li>
               </ul>
@@ -99,23 +105,23 @@
 
                     $name = $_POST["user"];
                     $email = $_POST["mail"];
-                    $pass = $_POST["pass"];
+                    $pass = password_hash($_POST["pass"],PASSWORD_DEFAULT);
 
                     $user = 'listmovies';
                     $pas = '';
                     $col = 'mysql:host=localhost;dbname=my_listmovies';
                     $db = new PDO($col, $user, $pass);
-                		$sql = "SELECT * FROM dati";
+                	$sql = "SELECT * FROM dati";
                     $cont = 0;
+                    $code = rand();
+                    $conf = 0;
                     foreach($db->query($sql) as $row){
                     	if(strcmp($row["email"],$email)==0){
                         	$cont = 1;
                         }
                     }
                     if($cont == 0){
-
-                    	$q = $db->prepare("INSERT INTO dati(nome,password,email,confiremd_code,confirmed)
-												VALUES (:nome,:password,:email,:code,:conf)");
+                    	$q = $db->prepare("INSERT INTO dati(nome,password,email,confiremd_code,confirmed) VALUES (:nome,:password,:email,:code,:conf)");
                         $q->bindParam(":nome",$name);
                         $q->bindParam(":password",$pass);
                         $q->bindParam(":email",$email);
@@ -126,9 +132,9 @@
                         $mail_mittente = "listmovies@gmail.com";
                         $mail_destinatario = $email;
 
-												$q2 = $db->query("SELECT * FROM dati WHERE email = '$email'");
+						$q2 = $db->query("SELECT * FROM dati WHERE email = '$email'");
                         $res = $q2->fetch();
-												$id = $res["id"];
+						$id = $res["id"];
                         $mail_oggetto = "Confirmation";
                         $mail_corpo = "http://listmovies.altervista.org/confirm.php?id=$id&code=$code";
 

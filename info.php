@@ -1,8 +1,15 @@
+<?php
+	session_start();
+	if(isset($_SESSION["name"])==false && $_SESSION["logged"]==false){
+    	header("Location: login.php");
+    }
+?>
 <html>
 	<head>
-		<title>Home</title>
+		<title>Information</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="icon" href="https://d30y9cdsu7xlg0.cloudfront.net/png/2385-200.png">    
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
 		<link rel="stylesheet" type="text/css" href="CSS/stile.css">
@@ -50,7 +57,6 @@
                       <ul class="dropdown-menu">
                           <li><a href="index.php">Main Page</a></li>
                           <li><a href="howto.php">How To</a></li>
-                          <li><a href="whoweare.php">Why</a></li>
                       </ul>
                   </li>
                   <li class="dropdown">
@@ -64,8 +70,8 @@
                   <li class="dropdown">
                       <a data-toggle="dropdown" class="dropdown-toggle" href="#">Suggestions<b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                          <li><a href="bestFilm.php">Highest Score</a></li>
-                          <li><a href="mostFilm.php">Most Seen</a></li>
+                          <li><a href="bestFilm.php">By Score</a></li>
+                          <li><a href="mostFilm.php">By Views</a></li>
                       </ul>
                   </li>
               </ul>
@@ -148,16 +154,17 @@
 					<div id="anteprima"></div>
 					<span id="invia"></span>
         </div>
-			</form>
-			<script>
-				function visualizza(){
-					$(document).ready(function(){
-							var x = document.getElementById("url").value;
-							$("#anteprima").attr("style","width: 200px; height: 200px; background-size: cover; background-image: url('" + x + "')");
-							document.getElementById("invia").innerHTML = "<br><br><button type='submit' class='btn btn-primary'>Submit</button><br><input style='visibility: hidden;' name='url' readonly type='text' value='" + x + "'>";
-					});
-				}
-			</script>
+        </form>
+        <script>
+          function visualizza(){
+            $(document).ready(function(){
+              var x = document.getElementById("url").value;
+              $("#anteprima").attr("style","width: 200px; height: 200px; background-size: cover; background-image: url('" + x + "')");
+              document.getElementById("invia").innerHTML = "<br><br><button type='submit' class='btn btn-primary'>Submit</button><br><input style='visibility: hidden;' name='url' readonly type='text' value='" + x + "'>";
+            });
+          }
+        </script>
+		<a id="form" style="color: white;" href="removeAccount.php">Do you want to remove your account?</a>
 		</div>
 	</body>
 </html>

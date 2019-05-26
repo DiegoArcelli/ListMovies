@@ -3,17 +3,17 @@
 		<title>Highest Score</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link rel="icon" href="https://d30y9cdsu7xlg0.cloudfront.net/png/2385-200.png">    
+        <link rel="icon" href="https://d30y9cdsu7xlg0.cloudfront.net/png/2385-200.png">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
 		<link rel="stylesheet" type="text/css" href="CSS/stile.css">
 		<style>
-            #main,#info {
-                display: inline-block;
-            }
-            .tel {
-            	display: none;
-            }
+      #main,#info {
+        display: inline-block;
+      }
+      .tel {
+      	display: none;
+      }
 			#lista img {
 				height: 200px;
 			}
@@ -34,31 +34,34 @@
 			#lista td {
 				background-color: #3a3f47;
 			}
-            @media only screen and (max-width: 750px) {
-                #cont {
-                    width: 100%;
-                }
-                #lista td, th {
-                    padding: 0px;
-                    text-align: center;
-                }
-     			#lista img {
+      @media only screen and (max-width: 750px) {
+	      #cont {
+	        width: 120%;
+	      }
+          #nav {
+          	width: 120%;
+          }
+	      #lista td, th {
+	      	padding: 0px;
+	        text-align: center;
+	      }
+				#lista img {
 					height: 80px;
 				}
-                .tel {
-                  display: block;
-                }
-                .comp {
-                  display: none;
-                }
-            }
+	      .tel {
+	        display: block;
+	      }
+	      .comp {
+	        display: none;
+	      }
+      }
     </style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
-    <body>
-    <nav class="navbar navbar-inverse"  style="border-radius: 0px; border: none; z-index: 1;">
+  <body>
+    <nav id="nav" class="navbar navbar-inverse"  style="border-radius: 0px; border: none; z-index: 1;">
         <div class="class="container-fluid>
           <div class="navbar-header">
               <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
@@ -94,22 +97,22 @@
                       </ul>
                   </li>
               </ul>
-			  <?php
-            	session_start();
-				if(isset($_SESSION["name"]) && $_SESSION["logged"]==true){
-                  echo "
-                  <ul class='nav navbar-nav navbar-right' id='element'>
-                  <li><a href='profilo.php'><span class='glyphicon glyphicon-user'></span> Profile</a></li>
-                  <li><a href='logout.php'><span class='glyphicon glyphicon-log-out'></span> Logout</a></li>
-                  </ul>";
-                } else {
-                  echo "
-                  <ul class='nav navbar-nav navbar-right' id='element'>
-                  <li><a href='register.php'><span class='glyphicon glyphicon-user'></span> Sign Up</a></li>
-                  <li><a href='login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a></li>
-                  </ul>";
-				}
-			   ?>
+						  <?php
+			        	session_start();
+								if(isset($_SESSION["name"]) && $_SESSION["logged"]==true){
+			              echo "
+			              <ul class='nav navbar-nav navbar-right' id='element'>
+			              <li><a href='profilo.php'><span class='glyphicon glyphicon-user'></span> Profile</a></li>
+			              <li><a href='logout.php'><span class='glyphicon glyphicon-log-out'></span> Logout</a></li>
+			              </ul>";
+			            } else {
+			              echo "
+			              <ul class='nav navbar-nav navbar-right' id='element'>
+			              <li><a href='register.php'><span class='glyphicon glyphicon-user'></span> Sign Up</a></li>
+			              <li><a href='login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a></li>
+			              </ul>";
+									}
+						   ?>
           </div>
         </div>
     </nav>
@@ -128,8 +131,8 @@
               <th>Title</th>
               <th>Genre</th>
               <th>Director</th>
-              <th>Users score</th>
-              <th>Users seen</th>
+              <th>Score</th>
+              <th>Views</th>
 							<?php
 								$user = 'listmovies';
 							  $pas = '';
@@ -153,14 +156,14 @@
 							?>
             </tr>
         </table>
-        
+
       	<table border = "1" id="lista" class="tel">
           	<tr>
               <th>Poster</th>
               <th>Title</th>
               <th>Director</th>
-              <th>Users score</th>
-              <th>Users seen</th>
+              <th>Score</th>
+              <th>Views</th>
 							<?php
 								$user = 'listmovies';
 							  $pas = '';
@@ -178,8 +181,8 @@
 								}
 							?>
             </tr>
-        </table>        
-        
+        </table>
+
       </center>
 		</div>
 	</body>

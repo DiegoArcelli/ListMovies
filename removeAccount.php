@@ -1,37 +1,28 @@
+<?php
+	session_start();
+	if(isset($_SESSION["name"])==false && $_SESSION["logged"]==false){
+    	header("Location: login.php");
+    }
+?>
 <html>
 	<head>
-		<title>Home</title>
+		<title>Delete Account</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="icon" href="https://d30y9cdsu7xlg0.cloudfront.net/png/2385-200.png">    
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
 		<link rel="stylesheet" type="text/css" href="CSS/stile.css">
-		<style>
-          * {
-            font-size: 16px;
-          }
-			#name {
-				color: white;
-			}
-
-			#name:hover {
-				color: darkred;
-			}
-            #cont {
-                  background-color: #222;
-                margin-top: 25px;
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            @media only screen and (max-width: 750px) {
+                #cont {
+                    width: 100%;
+                }
             }
-			#foto img {
-				margin-left: 15px;
-			}
-			body {
-      		background-color: #3a3f47
-          color: white;
-      }
-		</style>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        </style>
 	</head>
     <body>
     <nav class="navbar navbar-inverse"  style="border-radius: 0px; border: none; z-index: 1;">
@@ -52,7 +43,6 @@
                       <ul class="dropdown-menu">
                           <li><a href="index.php">Main Page</a></li>
                           <li><a href="howto.php">How To</a></li>
-                          <li><a href="whoweare.php">Why</a></li>
                       </ul>
                   </li>
                   <li class="dropdown">
@@ -66,8 +56,8 @@
                   <li class="dropdown">
                       <a data-toggle="dropdown" class="dropdown-toggle" href="#">Suggestions<b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                          <li><a href="bestFilm.php">Highest Score</a></li>
-                          <li><a href="mostFilm.php">Most Seen</a></li>
+                          <li><a href="bestFilm.php">By Score</a></li>
+                          <li><a href="mostFilm.php">By Views</a></li>
                       </ul>
                   </li>
               </ul>
@@ -90,41 +80,46 @@
           </div>
         </div>
     </nav>
-		<div id="myCarousel" class="carousel slide" data-ride="carousel">
-              	<ol class="carousel-indicators">
-                	<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                	<li data-target="#myCarousel" data-slide-to="1"></li>
-                	<li data-target="#myCarousel" data-slide-to="2"></li>
-              	</ol>
-              	<div class="carousel-inner">
-                	<div class="item active">
-                  		<img src="Foto/slides3.jpg" alt="Taxi Driver" style="width:100%;">
-                  		<div class="carousel-caption">
-                  	</div>
-                </div>
-
-                <div class="item">
-                  	<img src="Foto/slides1.jpg" alt="Pulp Fiction" style="width:100%;">
-                  	<div class="carousel-caption"></div>
-                </div>
-
-                <div class="item">
-                  <img src="Foto/slides2.jpg" alt="Il Padrino" style="width:100%;">
-                  <div class="carousel-caption"></div>
-                </div>
-
-              </div>
-              <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                <span class="sr-only">Next</span>
-              </a>
-            </div>
 		<div class="container" id="cont">
-			<h3>Why This Project?</h3>
-		</div>
+			<form method="POST" action="" style="padding-left: 20%; padding-right: 20%;" id="sign" onsubmit="return confirm('Are you sure you want to submit this form?');">
+            	<h3>Delete Account</h3>
+				<div class="form-group">
+			    <label for="exampleInputEmail1">Insert password:</label>
+			    <input name="pass" type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter password">
+			  </div>
+			  <button type="submit" class="btn btn-primary">Submit</button>
+			<br><br>
+			<?php
+
+				if(isset($_POST["pass"])){
+                
+                    $user = 'listmovies';
+                    $pas = '';
+                    $col = 'mysql:host=localhost;dbname=my_listmovies';
+                    $db = new PDO($col, $user, $pass);
+                    $id = $_SESSION["id"];
+                    $pass = $_POST["pass"];
+                    
+                    
+                    $sql = "SELECT * FROM dati WHERE id = $id";
+                    foreach($db->query($sql) as $row){
+                    	if(password_verify($pass,$row["password"])==1 && $row["confirmed"]==1){
+							$q = $db->prepare("DELETE FROM dati WHERE id = $id");
+                            $q->execute();
+							$q = $db->prepare("DELETE FROM Commenti WHERE id_user = $id");
+                            $q->execute();
+							$q = $db->prepare("DELETE FROM FilmVisti WHERE id_user = $id");
+                            $q->execute();                            
+                            header("Location: logout.php");
+                        } else {
+                        	echo "Wrong password";
+                        }
+                    }
+                }
+			?>
+
+           </form>
+         </div>
 	</body>
 </html>
+

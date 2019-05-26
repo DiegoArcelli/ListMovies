@@ -4,33 +4,29 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="icon" href="https://d30y9cdsu7xlg0.cloudfront.net/png/2385-200.png">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
 		<link rel="stylesheet" type="text/css" href="CSS/stile.css">
 		<style>
         	#area {
             	margin-left: 8%;
             }
-			input[type=text] {
-					margin: 30px;
-                    height: 50px;
-					width: 50%;
-					box-sizing: border-box;
-					border: 2px solid #ccc;
-					border-radius: 4px;
-					font-size: 16px;
-					background-color: white;
-					background-image: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png');
-					background-position: 10px 10px;
-					background-repeat: no-repeat;
-					padding: 12px 20px 12px 40px;
-					-webkit-transition: width 0.4s ease-in-out;
-					transition: width 0.4s ease-in-out;
-					color: grey;
+			#robba {
+				width: 60%;
+			}
+			#tasto {
+				height: 50px;
+				width: 50px;
+				background-color: #d9534f;
+				border: none;
+			}
+			#tasto:hover {
+				background-color: #d43f3a;
 			}
 			#search {
 				height: 50px;
         		width: 51px;
-                bottom: 1.5px;
+                bottom: 1px;
                 position: relative;
                 border-radius: 0px 5px 5px 0px;
                 right: 35;
@@ -58,34 +54,9 @@
                 #cont {
                     width: 100%;
                 }
-                #area {
-            		margin-left: 0%;
-            	}
-                input[type=text] {
-                        height: 50px;
-                        width: 70%;
-                        margin: 0px;
-                        margin-left: 5%;
-                        box-sizing: border-box;
-                        border: 2px solid #ccc;
-                        border-radius: 4px;
-                        font-size: 16px;
-                        background-color: white;
-                        background-image: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png');
-                        background-position: 10px 10px;
-                        background-repeat: no-repeat;
-                        -webkit-transition: width 0.4s ease-in-out;
-                        transition: width 0.4s ease-in-out;
-                        color: grey;
-                }
-                #search {
-                    height: 50px;
-                    width: 51px;
-                    bottom: 1.5px;
-                    position: relative;
-                    border-radius: 0px 5px 5px 0px;
-                    right: 35;
-                }
+								#robba {
+									width: 80%;
+								}
                 #main {
                   background-color:rgba(0, 0, 0, 0.5);
                   display: inline-block;
@@ -116,7 +87,6 @@
                       <ul class="dropdown-menu">
                           <li><a href="index.php">Main Page</a></li>
                           <li><a href="howto.php">How To</a></li>
-                          <li><a href="whoweare.php">Why</a></li>
                       </ul>
                   </li>
                   <li class="dropdown">
@@ -130,8 +100,8 @@
                   <li class="dropdown">
                       <a data-toggle="dropdown" class="dropdown-toggle" href="#">Suggestions<b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                          <li><a href="bestFilm.php">Highest Score</a></li>
-                          <li><a href="mostFilm.php">Most Seen</a></li>
+                          <li><a href="bestFilm.php">By Score</a></li>
+                          <li><a href="mostFilm.php">By Views</a></li>
                       </ul>
                   </li>
               </ul>
@@ -155,8 +125,20 @@
         </div>
     </nav>
 	<div id="cont">
+		<br>
+		<center>
+	<div class="input-group" id="robba">
+	<input type="text" class="form-control" placeholder="Search" id="key" required="required" style="height: 50px; font-size: 16px;">
+	<div class="input-group-btn">
+		<button id="tasto" class="btn btn-primary" onclick="search()" type="submit">
+			<span style="font-size: 18px;" class="glyphicon glyphicon-search"></span>
+		</button>
+	</div>
+</div>
+</center>
+		<br><br><br><br>
 	  <center>
-      	<div id="area"><input type="text" name="user" placeholder="Search..." id="key"><button style="margin-right: 8%" id="search" type="submit" class="btn btn-danger" onclick="search()"><span class="glyphicon glyphicon-search"></span></button></div>
+      	<div id="area"></div>
       	<br><img id="load" width="100" src="https://zippy.gfycat.com/SkinnySeveralAsianlion.gif"><br>
         <div id="lista"></div>
       	</center>

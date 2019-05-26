@@ -6,16 +6,20 @@
 ?>
 <html>
 	<head>
-		<title>Home</title>
+		<title>Profile</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="icon" href="https://d30y9cdsu7xlg0.cloudfront.net/png/2385-200.png">    
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
 		<link rel="stylesheet" type="text/css" href="CSS/stile.css">
     <style>
     	#main{
         	display: inline-block;
         }
+        	#spost {
+            	padding-left: 10px;
+            }
         	.tel  {
             	display: none;
             }
@@ -74,9 +78,7 @@
                 	display: inline;
                     text-align: left;
                 }
-                .tel td, .tel th, .tel a{
-                	font-size: 12px;
-                }
+
             }
     </style>
     <meta charset="utf-8">
@@ -102,7 +104,6 @@
                       <ul class="dropdown-menu">
                           <li><a href="index.php">Main Page</a></li>
                           <li><a href="howto.php">How To</a></li>
-                          <li><a href="whoweare.php">Why</a></li>
                       </ul>
                   </li>
                   <li class="dropdown">
@@ -116,13 +117,13 @@
                   <li class="dropdown">
                       <a data-toggle="dropdown" class="dropdown-toggle" href="#">Suggestions<b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                          <li><a href="bestFilm.php">Highest Score</a></li>
-                          <li><a href="mostFilm.php">Most Seen</a></li>
+                          <li><a href="bestFilm.php">By Score</a></li>
+                          <li><a href="mostFilm.php">By Views</a></li>
                       </ul>
                   </li>
               </ul>
 			  <?php
-        		session_start();
+            	session_start();
 				if(isset($_SESSION["name"]) && $_SESSION["logged"]==true){
                   echo "
                   <ul class='nav navbar-nav navbar-right' id='element'>
@@ -191,42 +192,42 @@
                     <tr>
                         <td style="padding: 10px;" rowspan="4"><div id="picture" style="width: 200px; height: 200px; background-image: url('<?php echo $img; ?>'); background-size: cover;"></div></td>
                         <th>Name:</th>
-                        <td><?php if($nome===NULL){
+                        <td id="spost"><?php if($nome===NULL){
                           echo " Not set";
                         } else {
                           echo $nome;
                         } ?></td>
-                        <th>Film watched:</th>
-                        <td><?php echo $num; ?></td>
+                        <th id="spost">Film watched:</th>
+                        <td id="spost"><?php echo $num; ?></td>
                     </tr>
                     <tr>
                         <th>Surname:</th>
-                        <td><?php if($sur===NULL){
+                        <td id="spost"><?php if($sur===NULL){
                           echo " Not set";
                         } else {
                           echo $sur;
                         } ?></td>
-                        <th>Medium score:</th>
-                        <td><?php echo round($avg,2); ?></td>
+                        <th id="spost">Medium score:</th>
+                        <td id="spost"><?php echo round($avg,2); ?></td>
                     </tr>
                     <tr>
                         <th>Birthday:</th>
-                        <td><?php if($birth===NULL){
+                        <td id="spost"><?php if($birth===NULL){
                           echo " Not set";
                         } else {
                           echo $birth;
                         } ?></td>
-                        <th>Favourites:</th>
-                        <td><?php echo $fav; ?></td>
+                        <th id="spost">Nickname:</th>
+                        <td id="spost"><?php echo $user; ?></td>
                     </tr>
                     <tr>
                         <th>Joined:</th>
-                        <td><?php
+                        <td id="spost"><?php
                         $x = explode(" ",$join);
                         echo $x[0];
                         ?></td>
-                        <th>Comments:</th>
-                        <td><?php echo $com; ?></td>                       
+                        <th id="spost">Comments:</th>
+                        <td id="spost"><?php echo $com; ?></td>                       
                     </tr>
                     <tr> 
                     	<th style="text-align: right; vertical-align: text-top; padding-right: 10px;">Description: </th>
@@ -279,8 +280,8 @@
                         <td><?php echo round($avg,2); ?></td>
                     </tr>
                     <tr>
-                    	<th>Favourites:</th>
-                        <td><?php echo $fav; ?></td>   
+                    	<th>Nickname:</th>
+                        <td><?php echo $user; ?></td>   
                     </tr>
                     <tr>
                         <th>Comments:</th>
@@ -298,14 +299,18 @@
             </center>
 			<center>
 			      	<table border = "1" id="lista" class="comp">
-			          	<tr>
-										<th>#</th>
-			            	<th>Poster</th>
-			              <th>Title</th>
-			              <th>Score</th>
-										<th>Genre</th>
-										<th>Director</th>
-									</tr>
+                    <?php
+                    	if($num>0){
+			          	echo "<tr>
+                          <th>#</th>
+                          <th>Poster</th>
+                          <th>Title</th>
+                          <th>Score</th>
+                          <th>Genre</th>
+                          <th>Director</th>
+						</tr>";
+                        }
+                        ?>
 										<?php
 											$user = 'listmovies';
 											$pas = '';
@@ -313,7 +318,7 @@
 											$db = new PDO($col, $user, $pass);
 											$id = $_GET["id"];
 											$cont=1;
-											$sql = "SELECT * FROM FilmVisti INNER JOIN Film ON FilmVisti.id_film = Film.id WHERE id_user = $id";
+											$sql = "SELECT * FROM FilmVisti INNER JOIN Film ON FilmVisti.id_film = Film.id WHERE id_user = $id ORDER BY data_aggiunta DESC";
 											foreach ($db->query($sql) as $row){
 												echo "<tr>";
 												echo "<td>$cont</td>";
@@ -329,20 +334,24 @@
 			        </table>
                     <br><br>
 			      	<table border = "1" id="lista" class="tel">
-			          	<tr>
-			            	<th>Poster</th>
-			              <th>Title</th>
-			              <th>Score</th>
-										<th>Genre</th>
-										<th>Director</th>
-									</tr>
+                    <?php
+                    	if($num>0){
+			          	echo "<tr>
+                          <th>Poster</th>
+                          <th>Title</th>
+                          <th>Score</th>
+                          <th>Genre</th>
+                          <th>Director</th>
+                      	</tr>";
+                        }
+                    ?>
 										<?php
 											$user = 'listmovies';
 											$pas = '';
 											$col = 'mysql:host=localhost;dbname=my_listmovies';
 											$db = new PDO($col, $user, $pass);
 											$id = $_GET["id"];
-											$sql = "SELECT * FROM FilmVisti INNER JOIN Film ON FilmVisti.id_film = Film.id WHERE id_user = $id";
+											$sql = "SELECT * FROM FilmVisti INNER JOIN Film ON FilmVisti.id_film = Film.id WHERE id_user = $id ORDER BY data_aggiunta DESC";
 											foreach ($db->query($sql) as $row){
 												echo "<tr>";
 												echo "<td><img src='" . $row["cover"] . "'></td>";
